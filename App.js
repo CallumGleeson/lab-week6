@@ -22,6 +22,16 @@ export default function App() {
     Alert.alert("Saved with UUID: " + uuid);
   }
 
+  async function getData() {
+    try {
+      let thisBooking = await AsyncStorage.getItem(uuid);
+      let parsedBooking = JSON.parse(thisBooking);
+      alert("Movie Title: " + parsedBooking.movieTitle);
+    } catch (error) {
+      alert("Error getting data: " + error.message);
+    }
+  }
+
   return (
     <View style={styles.screencontainer}>
       <View style={styles.imgview}><Image source={require('./assets/moviesV3.png')}/></View>
@@ -30,6 +40,7 @@ export default function App() {
           <MovieBooking screenstyle={styles.screen} data={booking} setData={setBooking}/>
       </Swiper>
       <TouchableOpacity style={styles.button} onPress={saveData}><Text style={{fontSize: 24, fontWeight: "bold"}}>Save Data</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={getData}><Text style={{fontSize: 24, fontWeight: "bold"}}>Get Data</Text></TouchableOpacity>
     </View>
   )
 }
