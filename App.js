@@ -1,5 +1,6 @@
 import { StyleSheet, View, Image, Dimensions, TouchableOpacity, Text, Alert } from 'react-native';
 import * as Crypto from 'expo-crypto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import PersonalInfo from './components/PersonalInfo';
 import MovieBooking from './components/MovieBooking';
@@ -16,6 +17,7 @@ export default function App() {
   });
   
   async function saveData() {
+    await AsyncStorage.setItem(uuid, JSON.stringify(booking));
     alert("Saved with UUID: " + uuid);
     Alert.alert("Saved with UUID: " + uuid);
   }
